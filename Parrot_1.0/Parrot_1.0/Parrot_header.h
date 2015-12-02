@@ -1,0 +1,61 @@
+//Biblioteki
+	#include<allegro5\allegro.h>
+	#include<allegro5\allegro_native_dialog.h>
+	#include<allegro5\allegro_image.h>
+	#include<iostream>
+	#include<process.h>						//Do obslugi watkow
+	#include<time.h>							//Do obslugi czasu
+	#include<stdlib.h>
+
+	using namespace std;
+
+//Deklaracja zmiennych
+
+	ALLEGRO_DISPLAY *display;			//Okno programu
+	ALLEGRO_BITMAP *mainMenu;			//Zdjecie dla menu glownego
+	ALLEGRO_BITMAP *mainMenu_1;
+	ALLEGRO_BITMAP *mainMenu_2;
+	ALLEGRO_BITMAP *mainMenu_3;
+	ALLEGRO_BITMAP *mainMenu_4;
+	ALLEGRO_BITMAP *instruction;		//Zdjecie dla Wprowadzenie i Instrukcja
+	ALLEGRO_BITMAP *results;			//Zdjecie dla Wyniki
+	ALLEGRO_BITMAP *piano;				//Zdjecie na glowny tryb gry
+	ALLEGRO_BITMAP *piano_started;		//Zdjecie po uruchomieniu stopera
+	ALLEGRO_BITMAP *piano_Q;
+	ALLEGRO_BITMAP *piano_W;
+	ALLEGRO_BITMAP *piano_E;
+	ALLEGRO_BITMAP *piano_R;
+	ALLEGRO_BITMAP *piano_T;
+	ALLEGRO_BITMAP *piano_Y;
+	ALLEGRO_BITMAP *piano_U;
+	ALLEGRO_BITMAP *piano_I;
+	ALLEGRO_BITMAP *piano_O;
+	ALLEGRO_BITMAP *piano_P;
+
+	ALLEGRO_EVENT_QUEUE *event_queue;				//Zdarzenie
+
+	enum mainMenuChoices {ROZPOCZNIJ_GRE, WYNIKI, WPROWADZENIE_I_INSTRUKCJA, WYJDZ_Z_GRY};
+	enum activeVindows {MENU_GLOWNE, GRA, INFORMACJA_O_WYNIKU};
+
+	int coursorCoordinate_X;
+	int coursorCoordinate_Y;
+	int mainMenuChoice = NULL;					//Wybor z menu glownego
+	int activeWindow = MENU_GLOWNE;				//Aktualne okno
+	int mainMenuButtonCoursored = NULL;			//Przycisk nakierowany kursorem
+	int stopper = 0;							//Aktualny stan stopera
+
+	bool leftMouseButtonClicked = false;
+	bool startClicked = false;
+
+
+//Funkcje watkowe
+	void start_stopper(void* dummy)
+	{
+		while(true)
+		{
+			Sleep(1000);		//Czeka 1 sekunde = 1000 milisekund
+			stopper++;
+			cout<<stopper<<endl;
+		}
+		_endthread();		//Zakoñczenie w¹tku
+	}
